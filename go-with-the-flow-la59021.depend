@@ -1,0 +1,24 @@
+# depslib dependency file v1.0
+1727816707 source:c:\users\legom\documents\code\repos\go-with-the-flow-la59021\main.cpp
+	<cassert>
+	"HeatFlow.hpp"
+
+1727818412 c:\users\legom\documents\code\repos\go-with-the-flow-la59021\heatflow.hpp
+	"Object.hpp"
+
+1727817891 c:\users\legom\documents\code\repos\go-with-the-flow-la59021\object.hpp
+	<vector>
+	"Sector.hpp"
+
+1727816707 c:\users\legom\documents\code\repos\go-with-the-flow-la59021\sector.hpp
+
+1727816707 source:c:\users\legom\documents\code\repos\go-with-the-flow-la59021\sector.cpp
+	"Sector.hpp"
+
+1727817897 source:c:\users\legom\documents\code\repos\go-with-the-flow-la59021\object.cpp
+	"Object.hpp"
+
+1727817926 source:c:\users\legom\documents\code\repos\go-with-the-flow-la59021\heatflow.cpp
+	<iostream>
+	"HeatFlow.hpp"
+
