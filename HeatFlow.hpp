@@ -1,18 +1,19 @@
-#include "Sector.hpp"
+#include <string>
+#include "Object.hpp"
 using namespace std;
 
 class HeatFlow {
     public:
-        HeatFlow(double initalTemp, double rodLength, double kConstant);
-        void tick(Object localObject);
+        HeatFlow();
+        HeatFlow(vector<double> stats, vector<bool> sourceOrSink, vector<double> constantTemps);
+        HeatFlow(double initalTemp, int rodLength, double kConstant, vector<bool> sourceOrSink, vector<double> constantTemps);
+        void tick();
         void pretty_print();
-
+        string getCurrentTemps();
     private:
-        void askHowManySections();
-        int askHowManySources();
-        vector<int> askWhereTheSourcesAre(int q, int length);
-        int askHowManySinks();
-        vector<int> askWhereTheSinksAre(int q, int length);
-        vector<Sector> createObject(double initalTemp, double rodLength, double kConstant);
-        int sections;
+        vector<double> askForStats();
+        int askHowManyConstants();
+        vector<bool> askWhereTheConstantsAre(int numOfConstants, int rodLength);
+        vector<double> askWhatConstantTempsAre(int numOfConstants, int rodLength, vector<bool> constants);
+        Object o;
 };

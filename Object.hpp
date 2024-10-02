@@ -1,21 +1,17 @@
 #include <vector>
-#include "Sector.hpp"
 using namespace std;
 
 class Object {
     public:
-        Object(double initalTemp, double rodLength, double kConstant, vector<int> sources, vector<int> sinks);
-        int getSections();
-        vector<int> getSources();
-        void setSources(vector<int> newSources);
-        vector<int> getSinks();
-        void setSinks(vector<int> newSinks);
+        Object();
+        void setObject(vector<double> Stats, vector<bool> sourceOrSink, vector<double> Temps);
+        void tick();
+        void pretty_print();
+        vector<double> getCurrentRod();
     private:
-        double localInitalTemp;
-        double localRodLength;
-        double localK;
-        vector<Sector> localObject;
-        vector<int> localSources;
-        vector<int> localSinks;
-
+        vector<double> rodStats; // inital temp, rod length, K
+        vector<double> currentRod; // current temps
+        vector<double> nextRod; // next temps
+        vector<bool> constants; // is source or sink (held constant)
+        vector<double> constantTemps; // temps constants are held at
 };
