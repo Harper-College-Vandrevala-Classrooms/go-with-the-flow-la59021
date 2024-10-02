@@ -32,9 +32,9 @@ string HeatFlow::getCurrentTemps() {
     for (int x = 0; x < o.getCurrentRod().size(); x++) {
         string tempString = to_string(o.getCurrentRod()[x]);
         tempString.resize(6);
-        temps += tempString + " ";
+        temps += tempString + ", ";
     };
-    temps.resize(temps.size()-1);
+    temps.resize(temps.size()-2);
     return temps;
 }
 
