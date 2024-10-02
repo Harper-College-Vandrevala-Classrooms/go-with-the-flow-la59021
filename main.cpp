@@ -1,14 +1,40 @@
 #include <cassert>
 #include <iostream>
+#include <fstream>
 #include "HeatFlow.hpp"
 using namespace std;
+
+void printC() {
+    ofstream myfile;
+    myfile.open("C.txt");
+    vector<double> stats {2000, 4, 0.6}; // inital temp, rod length, K
+    vector<bool> sourceOrSink(stats[1], false);
+    sourceOrSink[3] = true;
+    vector<double> constantTemps(stats[1], 0);
+    constantTemps[3] = -30;
+    HeatFlow h(stats, sourceOrSink, constantTemps);
+    string startString = h.getCurrentTemps();
+    char start = startString[startString.size()-3];
+    int x;
+    myfile << h.getCurrentTemps() << endl;
+    while (x < 20) {
+        h.tick();
+        myfile << h.getCurrentTemps() << endl;
+        startString = h.getCurrentTemps();
+        start = startString[startString.size()-3];
+        x++;
+    }
+    myfile.close();
+}
 
 void testA() {
     cout << "First tests, the inital temperture is set to 10, there are 8 sections and the K is set to 0.1" << endl;
     cout << "There is a source set to 100 at index 0." << endl;
     vector<double> stats {10, 8, 0.1}; // inital temp, rod length, K
-    vector<bool> sourceOrSink {true, false, false, false, false, false, false, false};
-    vector<double> constantTemps {100, 0, 0, 0, 0, 0, 0, 0};
+    vector<bool> sourceOrSink(stats[1], false);
+    sourceOrSink[0] = true;
+    vector<double> constantTemps(stats[1], 0);
+    constantTemps[0] = 100;
     HeatFlow h(stats, sourceOrSink, constantTemps);
     assert(h.getCurrentTemps() == "100.00, 10.000, 10.000, 10.000, 10.000, 10.000, 10.000, 10.000");
     cout << h.getCurrentTemps() << endl;
@@ -142,10 +168,80 @@ void testB() {
     assert(h.getCurrentTemps() == "59.137, 54.951, 46.203, 34.790, 20.334, 5.0000, 53.747, 102.49, 151.24, 200.00, 182.38, 164.76, 150.34, 135.93, 126.32, 116.74, 111.60, 106.61, 104.58, 103.10");
 }
 
-int main() {
-    testA();
-    //printToFile();
-    testB();
+void testC() {
+    cout << endl << "Third tests, the inital temperture is set to 2000, there are 4 sections and the K is set to 0.6" << endl;
+    cout << "There is a constant at index 3 it is set to -30." << endl;
+    vector<double> stats {2000, 4, 0.6}; // inital temp, rod length, K
+    vector<bool> sourceOrSink(stats[1], false);
+    sourceOrSink[3] = true;
+    vector<double> constantTemps(stats[1], 0);
+    constantTemps[3] = -30;
+    HeatFlow h(stats, sourceOrSink, constantTemps);
+    cout << h.getCurrentTemps() << endl;
+    assert(h.getCurrentTemps() == "2000.0, 2000.0, 2000.0, -30.00");
+    h.tick();
+    cout << h.getCurrentTemps() << endl;
+    assert(h.getCurrentTemps() == "2000.0, 2000.0, 782.00, -30.00");
+    h.tick();
+    cout << h.getCurrentTemps() << endl;
+    assert(h.getCurrentTemps() == "2000.0, 1269.2, 1025.6, -30.00");
+    h.tick();
+    cout << h.getCurrentTemps() << endl;
+    assert(h.getCurrentTemps() == "1561.5, 1561.5, 538.40, -30.00");
+    h.tick();
+    cout << h.getCurrentTemps() << endl;
+    assert(h.getCurrentTemps() == "1561.5, 947.64, 811.23, -30.00");
+    h.tick();
+    cout << h.getCurrentTemps() << endl;
+    assert(h.getCurrentTemps() == "1193.1, 1234.1, 388.34, -30.00");
+    h.tick();
+    cout << h.getCurrentTemps() << endl;
+    assert(h.getCurrentTemps() == "1217.7, 702.09, 644.80, -30.00");
+    h.tick();
+    cout << h.getCurrentTemps() << endl;
+    assert(h.getCurrentTemps() == "908.36, 977.11, 274.29, -30.00");
+    h.tick();
+    cout << h.getCurrentTemps() << endl;
+    assert(h.getCurrentTemps() == "949.61, 514.17, 513.40, -30.00");
+    h.tick();
+    cout << h.getCurrentTemps() << endl;
+    assert(h.getCurrentTemps() == "688.34, 774.97, 187.82, -30.00");
+    h.tick();
+    cout << h.getCurrentTemps() << endl;
+    assert(h.getCurrentTemps() == "740.32, 370.70, 409.42, -30.00");
+    h.tick();
+    cout << h.getCurrentTemps() << endl;
+    assert(h.getCurrentTemps() == "518.55, 615.70, 122.53, -30.00");
+    h.tick();
+    cout << h.getCurrentTemps() << endl;
+    assert(h.getCurrentTemps() == "576.84, 261.51, 326.91, -30.00");
+    h.tick();
+    cout << h.getCurrentTemps() << endl;
+    assert(h.getCurrentTemps() == "387.64, 489.95, 73.525, -30.00");
+    h.tick();
+    cout << h.getCurrentTemps() << endl;
+    assert(h.getCurrentTemps() == "449.03, 178.71, 261.26, -30.00");
+    h.tick();
+    cout << h.getCurrentTemps() << endl;
+    assert(h.getCurrentTemps() == "286.84, 390.43, 36.974, -30.00");
+    h.tick();
+    cout << h.getCurrentTemps() << endl;
+    assert(h.getCurrentTemps() == "348.99, 116.20, 208.86, -30.00");
+    h.tick();
+    cout << h.getCurrentTemps() << endl;
+    assert(h.getCurrentTemps() == "209.32, 311.47, 9.9471, -30.00");
+    h.tick();
+    cout << h.getCurrentTemps() << endl;
+    assert(h.getCurrentTemps() == "270.61, 69.264, 166.89, -30.00");
+    h.tick();
+    cout << h.getCurrentTemps() << endl;
+    assert(h.getCurrentTemps() == "149.80, 248.65, -9.820, -30.00");
+}
 
+int main() {
+    //testA();
+    //testB();
+    testC();
+    //printC();
     return 0;
 }
