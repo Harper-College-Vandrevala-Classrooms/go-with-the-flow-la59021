@@ -27,8 +27,7 @@
 		<Unit filename="HeatFlow.cpp" />
 		<Unit filename="HeatFlow.hpp" />
 		<Unit filename="Object.cpp" />
-		<Unit filename="Sector.cpp" />
-		<Unit filename="Sector.hpp" />
+		<Unit filename="Object.hpp" />
 		<Unit filename="main.cpp" />
 		<Extensions />
 	</Project>
